@@ -6,6 +6,3 @@ os.system("git add *")
 m ="git commit -m " + "\'" + " msg" + "\'"
 os.system(m)
 os.system("git push")
-
-os.system("git config --global user.name ”FULADO”")
-os.system("git config --global user.email FULAON.CICLANO@mail.com")
