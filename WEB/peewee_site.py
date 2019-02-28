@@ -7,6 +7,7 @@ class MM(Model):
 		database = db
 
 class Pessoa(MM):
+	cod_pessoa = AutoField(primary_key = True)
 	nom_pessoa = CharField()
 	endereco = CharField()
 

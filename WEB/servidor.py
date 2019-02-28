@@ -51,14 +51,17 @@ def form_alterar():
 	id = pegar("id")
 	nome = pegar("nome")
 	ende = pegar("endereco")
-	pe=Pessoa(id, nome, ende)
-	return render_template("form_alterar.html", p=pe)
+	return render_template("form_alterar.html", id = id, nome = nome, endereco = ende )
 
 @app.route("/alterar_pessoa")
 def alterar_pessoa():
 	id = pegar("id")
 	nome = pegar("nome")
 	ende = pegar("endereco")
+	pe = p.Pessoa.select().where(p.Pessoa.cod_pessoa == id)
+	pe[0].nome = nome
+	pe[0].endereco = ende
+	pe.save()
 	#gest.alterar_por_id(id,nome,ende)
 	return redirect("/listar_pessoas")
 
@@ -85,14 +88,13 @@ def login():
 		senha_comparar = p.Contas.select().where(p.Contas.user == user)
 		print(senha_comparar[0].passwd)
 		print("--------------", senha_comparar)
-		if senha_comparar:
-			m.update(request.form["passwd"].encode())
-			senha = m.hexdigest()
-			print("--------------", senha)
-			if senha == senha_comparar[0].passwd:
-				logado = True
-				m = md5()
-				#session["user"] = user
+		m.update(request.form["passwd"].encode())
+		senha = m.hexdigest()
+		print("--------------", senha)
+		if senha == senha_comparar[0].passwd:
+			logado = True
+			m = md5()
+			#session["user"] = user
 	return redirect("/")
 
 @app.route("/form_cadastrar")
