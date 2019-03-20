@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title>  video </title> 
+	<link rel="stylesheet" type="text/css" href="">
+</head>
+<body>
+	<video width = "800" height = "600" controls="controls" autoplay="autoplay">
+		<source src="{{url_for('static', filename='video/calmo.mp4')}}" type="video/mp4">
+		<object data = "" width = "800" height = "600">
+			<embed width = "800" height = "600" src="{{url_for('static', filename='video/calmo.mp4')}}">
+		</object>
+	</video>
+	<br>
+	<a href = "/"> Inicio </a>
+</body>
+</html>

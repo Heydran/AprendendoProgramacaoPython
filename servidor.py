@@ -15,7 +15,9 @@ def inicio():
 @app.route("/listar_pessoas")
 def listar_pessoas():
 	return render_template("listar_pessoas.html", users = lista)
+
+@app.route("/ver_video")
+def ver_video():
+	return render_template("ver_video.html")
+
 app.run()
-
-
-

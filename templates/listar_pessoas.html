@@ -8,8 +8,8 @@
 <body>
 	<h1> Pessoas </h1>
 	{% for i in users: %} 
-		{{ loop.index }} ª <font id = "verde"> Pessoa: </font>  <font id = "azul"> {{ i.nome }} </font> - <font id = "laranja"> Telefone: </font> <font id = "rosa" > {{i.telefone}} </font> - <font id = "ciano"> Endereço: </font> <font id = vermelho> {{i.endereco}} </font><br>
+		<font id = "cinza"> {{ loop.index }} ª  </font> <font id = "verde"> Pessoa: </font>  <font id = "azul"> {{ i.nome }} </font> - <font id = "laranja"> Telefone: </font> <font id = "rosa" > {{i.telefone}} </font> - <font id = "ciano"> Endereço: </font> <font id = vermelho> {{i.endereco}} </font><br>
 	{% endfor %}
-	<a href="/">Inicio</a>
+	<a href="/" style="color:purple"> Inicio </a>
 </body>
 </html>
