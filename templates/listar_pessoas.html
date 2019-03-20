@@ -2,13 +2,13 @@
 <html>
 <head>
 	<title> Pessoas </title>
-	<h1> <b> Pessoas </b> </h1>
+	
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/aota.css')}}">
 </head>
 <body>
-	{% set contador = 1%}
+	<h1> Pessoas </h1>
 	{% for i in users: %} 
-		{{ contador }} "ª Pessoa: " {{ i.nome }} <br>
-		{{ contador++ }}
+		{{ loop.index }} ª <font id = "verde"> Pessoa: </font>  <font id = "azul"> {{ i.nome }} </font> - <font id = "laranja"> Telefone: </font> <font id = "rosa" > {{i.telefone}} </font> - <font id = "ciano"> Endereço: </font> <font id = vermelho> {{i.endereco}} </font><br>
 	{% endfor %}
 	<a href="/">Inicio</a>
 </body>
