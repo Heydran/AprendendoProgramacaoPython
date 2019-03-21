@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Pessoas </title>
+	
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/aota.css')}}">
+</head>
+<body>
+	<h1> Pessoas </h1>
+	{% for i in users: %} 
+		<font id = "cinza"> {{ loop.index }} ª  </font> <font id = "verde"> Pessoa: </font>  <font id = "azul"> {{ i.nome }} <!-- </font> - <font id = "laranja"> Telefone: </font> <font id = "rosa" > {{i.telefone}} </font>  -->- <font id = "ciano"> Endereço: </font> <font id = vermelho> {{i.endereco}} </font><br>
+	{% endfor %}
+	<input type="text" name="">
+	<input type="submit" name="Deletar">
+	<a href="/" style="color:purple"> Inicio </a><br>
+	<a href="/form_adicionar"></a>
+</body>
+</html>

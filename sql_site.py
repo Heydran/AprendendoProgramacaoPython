@@ -36,12 +36,12 @@ class GerenciadorPessoa(object):
 		resultados = self.s.query(Pessoa).filter(Animes.nome == nome)
 		pessoas = []
 		for resultado in resultados:
-			pessoas.append(Animes(id = resultado.id, nome = resultado.nome, genero = resultado.genero))
+			pessoas.append(Pessoa(id = resultado.id, nome = resultado.nome, endereco = resultado.endereco))
 		return pessoas
 
 	def listar_tabela(self):
 		resultados = self.s.query(Pessoa)
-		animes = []
+		pessoas = []
 		for resultado in resultados:
-			pessoas.append(Animes(id = resultado.id, nome = resultado.nome, genero = resultado.genero))
+			pessoas.append(Pessoa(id = resultado.id, nome = resultado.nome, endereco = resultado.endereco))
 		return pessoas

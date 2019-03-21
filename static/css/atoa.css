@@ -11,9 +11,17 @@
 }
 
 #rosa{
-	color: pink;
+	color: #ff007f;
 }
 
 #ciano{
 	color: cyan;
+}
+
+#vermelho{
+	color:red;
+}
+
+#cinza{
+	color:gray;
 }
