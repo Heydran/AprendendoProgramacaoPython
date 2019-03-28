@@ -8,10 +8,21 @@
 <body bgcolor="#202020">
 	<h1 style = "color: #fc0fc0"> Pessoas </h1>
 	<b>
-	<font id = "cinza"> ID  | </font>  <font id = "verde"> Nome: </font> - <font id = "ciano"> Endereço: </font> <br>
+	<table border="1">
+	<tr>	
+	<td><font id = "cinza"> ID  | </font> </td> <td> <font id = "verde"> Nome: </font> </td> <td> <font id = "ciano"> Endereço: </font> </td> 
+	<td> <font id = vermelho>Excluir</font>
+	</tr>
 	{% for i in users: %} 
-		<font id = "cinza"> {{ loop.index }} ª | </font> <font id = "verde"> {{ i.nome }} </font> - <font id = "ciano"> {{i.endereco}} </font><br>
+		<tr>	
+		<td> <font id = "cinza"> {{ loop.index }} ª |</font> </td>
+		<td> <font id = "verde"> {{ i.nome }} </font> - </td>
+		<td> <font id = "ciano"> {{i.endereco}} </font> </td>
+		<td> <a href="/deletar_pessoa?nome={{i.nome}}"><img src="/static/imagens/foto.png"></a> </td>
+		</tr>
 	{% endfor %}
+	
+	</table>
 	<a href="/" style="color:#fc0fc0"> Inicio </a><br>
 	<a href="/form_adicionar"></a>
 	</b>

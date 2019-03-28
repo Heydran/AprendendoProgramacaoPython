@@ -28,8 +28,8 @@ class GerenciadorPessoa(object):
 		self.s.add(pessoa)
 		self.s.commit()
 
-	def remover_da_tabela_id(self, num):
-		self.s.query(Pessoa).filter(Pessoa.id == num).delete()
+	def remover_da_tabela_nome(self, nome):
+		self.s.query(Pessoa).filter(Pessoa.nome == nome).delete()
 		self.s.commit()
 
 	def buscar_na_tabela(self, nome):

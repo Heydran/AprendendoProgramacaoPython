@@ -48,10 +48,12 @@ def adicionar_pessoa():
 	#return render_template("listar_pessoas.html", users = geps.listar_tabela())
 	return redirect("/listar_pessoas")
 
-@app.route("/form_deletar")
+@app.route("/deletar_pessoa")
 def deletar_pessoa():
-	return render_template("form_deletar.html")
+	nome = request.args.get("nome")
+	geps.remover_da_tabela_nome(nome)
+	return redirect("/listar_pessoas")
 
 
 
-app.run()
+app.run(debug=True)
