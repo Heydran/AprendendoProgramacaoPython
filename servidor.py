@@ -18,9 +18,6 @@ from sql_site import GerenciadorPessoa as Geps
 geps = Geps()
 geps.criar_tabela()
 
-def listar_pessoas():
-	return geps.listar_tabela()
-
 app = Flask("__name__")
 
 @app.route("/")
@@ -54,6 +51,11 @@ def deletar_pessoa():
 	geps.remover_da_tabela_nome(nome)
 	return redirect("/listar_pessoas")
 
+@app.route("/form_alterar")
+def form_alterar():
 
+
+
+	return render_template("form_alterar.html")
 
 app.run(debug=True)

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Alterar Pessoas</title>
+</head>
+<body>
+	<h1>adicionar pessoa</h1>
+	<form action = "/alterar_pessoa">
+		Nome: <input type="text" name="nome" value=p.nome ><br>
+		Endereço: <textarea name="endereco">{{p.enderecos}}</textarea><br>
+		<input type=hidden value=p.id>
+		<input type="submit" value="Enviar"><br>
+	</form>
+</body>
+</html>

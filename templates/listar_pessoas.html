@@ -10,15 +10,19 @@
 	<b>
 	<table border="1">
 	<tr>	
-	<td><font id = "cinza"> ID  | </font> </td> <td> <font id = "verde"> Nome: </font> </td> <td> <font id = "ciano"> Endereço: </font> </td> 
-	<td> <font id = vermelho>Excluir</font>
+	<td> <center> <font id = "cinza"> ID  | </font> </center> </td> 
+	<td> <center> <font id = "verde"> Nome: </font> </center> </td> 
+	<td> <center> <font id = "ciano"> Endereço: </font> </center>  </td> 
+	<td> <center> <font id = vermelho>Excluir</font> </center> </td>
+	<td> <center> <font id = laranja>Alterar</font> </center> </td>
 	</tr>
 	{% for i in users: %} 
 		<tr>	
-		<td> <font id = "cinza"> {{ loop.index }} ª |</font> </td>
-		<td> <font id = "verde"> {{ i.nome }} </font> - </td>
-		<td> <font id = "ciano"> {{i.endereco}} </font> </td>
-		<td> <a href="/deletar_pessoa?nome={{i.nome}}"><img src="/static/imagens/foto.png"></a> </td>
+		<td> <center> <font id = "cinza"> {{ i.id }} ª |</font> </center> </td>
+		<td> <center> <font id = "verde"> {{ i.nome }} </font> </center> </td>
+		<td> <center> <font id = "ciano"> {{i.endereco}} </font> </center> </td>
+		<td> <a href="/deletar_pessoa?nome={{i.nome}}"><center><img src="/static/imagens/foto.png"></center></a> </td>
+		<td> <a href="/form_alterar?id={{i.id}}&nome={{i.nome}}&endereco={{i.endereco}}"> <center> <img src="/static/imagens/lapis.png"></center></a> </td>
 		</tr>
 	{% endfor %}
 	
