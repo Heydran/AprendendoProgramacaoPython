@@ -1,7 +1,7 @@
 class Pessoa(object):
-	def __init__(self, nome,  telefone, endereco):
+	def __init__(self, id, nome, endereco):
+		self.id = id
 		self.nome = nome
-		self.telefone = telefone
 		self.endereco = endereco
 
 
@@ -12,14 +12,13 @@ class Pessoa(object):
 
 
 from flask import Flask, render_template, request, redirect
-from sql_site import Pessoa as People
 from sql_site import GerenciadorPessoa as Geps
 
 geps = Geps()
 geps.criar_tabela()
 
 app = Flask("__name__")
-
+pegar = lambda x: request.args.get(x)
 @app.route("/")
 def inicio():
 	return render_template("inicio.html")
@@ -53,9 +52,18 @@ def deletar_pessoa():
 
 @app.route("/form_alterar")
 def form_alterar():
+	id = pegar("id")
+	nome = pegar("nome")
+	ende = pegar("endereco")
+	p=Pessoa(id, nome, ende)
+	return render_template("form_alterar.html", p=p)
 
-
-
-	return render_template("form_alterar.html")
+@app.route("/alterar_pessoa")
+def alterar_pessoa():
+	id = pegar("id")
+	nome = pegar("nome")
+	ende = pegar("endereco")
+	geps.alterar_por_id(id,nome,ende)
+	return redirect("/listar_pessoas")
 
 app.run(debug=True)

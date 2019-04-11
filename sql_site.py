@@ -1,4 +1,10 @@
-from sqlalchemy import Column, Integer, String, create_engine
+try: 
+	from sqlalchemy import Column, Integer, String, create_engine, update
+except:
+	from os import system
+	system("pip3 install sqlalchemy")
+	system("pip3 install mysql-connector")
+	from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -13,7 +19,11 @@ class Pessoa(Base):
 
 class GerenciadorPessoa(object):
 	def __init__(self):	
-		self.engine = create_engine("mysql+mysqlconnector://root:root@localhost/PessoaAndre")
+		self.engine = create_engine("mysql+mysqlconnector://root:root@localhost")
+		self.conn = self.engine.connect()
+		self.conn.execute("create schema if not exists PessoaAndre")
+		self.conn.execute("use PessoaAndre")
+		self.conn.close()
 		self.session = sessionmaker(bind = self.engine)
 		self.s = self.session()
 
@@ -33,11 +43,16 @@ class GerenciadorPessoa(object):
 		self.s.commit()
 
 	def buscar_na_tabela(self, nome):
-		resultados = self.s.query(Pessoa).filter(Animes.nome == nome)
+		resultados = self.s.query(Pessoa).filter(Pessoa.nome == nome)
 		pessoas = []
 		for resultado in resultados:
 			pessoas.append(Pessoa(id = resultado.id, nome = resultado.nome, endereco = resultado.endereco))
 		return pessoas
+
+	def alterar_por_id(self, id, nome, endereco):
+		resultado = self.s.query(Pessoa).filter(Pessoa.id == id).update({"endereco":(endereco)})
+		resultado = self.s.query(Pessoa).filter(Pessoa.id == id).update({"nome":(nome)})
+		self.s.commit()
 
 	def listar_tabela(self):
 		resultados = self.s.query(Pessoa)
@@ -45,3 +60,7 @@ class GerenciadorPessoa(object):
 		for resultado in resultados:
 			pessoas.append(Pessoa(id = resultado.id, nome = resultado.nome, endereco = resultado.endereco))
 		return pessoas
+
+if __name__ == '__main__':
+	o=GerenciadorPessoa()
+	o.alterar_por_id(2,"oi", "io")

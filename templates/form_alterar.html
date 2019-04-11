@@ -6,9 +6,9 @@
 <body>
 	<h1>adicionar pessoa</h1>
 	<form action = "/alterar_pessoa">
-		Nome: <input type="text" name="nome" value=p.nome ><br>
-		Endereço: <textarea name="endereco">{{p.enderecos}}</textarea><br>
-		<input type=hidden value=p.id>
+		Nome: <input type="text" name="nome" value={{p.nome}} ><br>
+		Endereço: <textarea name="endereco">{{p.endereco}}</textarea><br>
+		<input type=hidden value={{p.id}} name=id>
 		<input type="submit" value="Enviar"><br>
 	</form>
 </body>
