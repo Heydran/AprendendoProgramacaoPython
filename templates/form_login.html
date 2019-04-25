@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/text.css')}}">
+	<a id=ali_dir href="/">Inicio</a>
+</head>
+<body>
+	<form action="/login" method="POST">
+		User:<input type="text" name="user"><br>
+		Password:<input type="password" name="passwd"><br>
+		<button>Login</button>
+	</form>
+</body>
+</html>

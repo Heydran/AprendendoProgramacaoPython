@@ -2,11 +2,23 @@
 <html>
 <head>
 	<title> Pagina Inicial </title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/text.css')}}">
+	{% if logado%}
+		<a id="ali_dir" href="/logout">Logout</a>
+	{%else%}
+		<a id="ali_dir" href="/form_login">Login</a><br>
+		<a id="ali_dir" href="/form_cadastrar">Cadastrar</a>
+	{%endif%}
 	<h1>Bem Vindo</h1>
+	
 </head>
 <body>
 	<a href="/listar_pessoas">Listar Pessoas</a> <br>
-	<a href="/form_adicionar"> Adicionar Pessoa</a> <br>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/text.css')}}">
+	{% if logado%}
+		<a href="/form_adicionar"> Adicionar Pessoa</a> <br>
+	{%endif%}
+	
 	<a href="/ver_video">Ver Video</a> <br>
 
 </body>

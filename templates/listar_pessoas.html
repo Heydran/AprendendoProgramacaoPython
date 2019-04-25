@@ -3,7 +3,14 @@
 <head>
 	<title> Pessoas </title>
 	
-	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/atoa.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/colors.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/text.css')}}">
+	{% if logado%}
+		<a id="ali_dir" href="/logout">Logout</a>
+	{%else%}
+		<a id="ali_dir" href="/form_login">Login</a><br>
+		<a id="ali_dir" href="/form_cadastrar">Cadastrar</a>
+	{%endif%}
 </head>
 <body bgcolor="#202020">
 	<h1 style = "color: #fc0fc0"> Pessoas </h1>
@@ -13,16 +20,20 @@
 	<td> <center> <font id = "cinza"> ID  | </font> </center> </td> 
 	<td> <center> <font id = "verde"> Nome: </font> </center> </td> 
 	<td> <center> <font id = "ciano"> Endereço: </font> </center>  </td> 
-	<td> <center> <font id = vermelho>Excluir</font> </center> </td>
+	{%if logado%}
 	<td> <center> <font id = laranja>Alterar</font> </center> </td>
+	<td> <center> <font id = vermelho>Excluir</font> </center> </td>
+	{%endif%}
 	</tr>
 	{% for i in users: %} 
 		<tr>	
 		<td> <center> <font id = "cinza"> {{ i.id }} ª |</font> </center> </td>
 		<td> <center> <font id = "verde"> {{ i.nome }} </font> </center> </td>
 		<td> <center> <font id = "ciano"> {{i.endereco}} </font> </center> </td>
-		<td> <a href="/deletar_pessoa?nome={{i.nome}}"><center><img src="/static/imagens/foto.png"></center></a> </td>
+		{% if logado%}
 		<td> <a href="/form_alterar?id={{i.id}}&nome={{i.nome}}&endereco={{i.endereco}}"> <center> <img src="/static/imagens/lapis.png"></center></a> </td>
+		<td> <a href="/deletar_pessoa?nome={{i.nome}}"><center><img src="/static/imagens/foto.png"></center></a> </td>
+		{%endif%}
 		</tr>
 	{% endfor %}
 	

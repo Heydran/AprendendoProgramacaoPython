@@ -11,21 +11,27 @@ class Pessoa(object):
 
 
 
-from flask import Flask, render_template, request, redirect
-from sql_site import GerenciadorPessoa as Geps
-
-geps = Geps()
-geps.criar_tabela()
+from flask import Flask, render_template, request, redirect, session
+from sql_site import GerenciadorSite as gest
+from hashlib import md5
+gest = gest()
+gest.criar_tabela()
 
 app = Flask("__name__")
+app.config["secret_key"] = 'senha'
+m = md5()
+logado = False
 pegar = lambda x: request.args.get(x)
+pegar2 = lambda x: request.form[x]
 @app.route("/")
 def inicio():
-	return render_template("inicio.html")
+	global logado
+	return render_template("inicio.html", logado = logado)
+	
 
 @app.route("/listar_pessoas")
 def listar_pessoas():
-	return render_template("listar_pessoas.html", users = geps.listar_tabela())
+	return render_template("listar_pessoas.html", users = gest.listar_tabela(), logado = logado)
 
 @app.route("/ver_video")
 def ver_video():
@@ -39,15 +45,15 @@ def form_adicionar():
 def adicionar_pessoa():
 	nome = request.args.get("nome")
 	endereco = request.args.get("endereco")
-	geps.adicionar_na_tabela(nome,endereco)		
+	gest.adicionar_na_tabela(nome,endereco)		
 	#url_for("listar_pessoas")
-	#return render_template("listar_pessoas.html", users = geps.listar_tabela())
+	#return render_template("listar_pessoas.html", users = gest.listar_tabela())
 	return redirect("/listar_pessoas")
 
 @app.route("/deletar_pessoa")
 def deletar_pessoa():
 	nome = request.args.get("nome")
-	geps.remover_da_tabela_nome(nome)
+	gest.remover_da_tabela_nome(nome)
 	return redirect("/listar_pessoas")
 
 @app.route("/form_alterar")
@@ -63,7 +69,59 @@ def alterar_pessoa():
 	id = pegar("id")
 	nome = pegar("nome")
 	ende = pegar("endereco")
-	geps.alterar_por_id(id,nome,ende)
+	gest.alterar_por_id(id,nome,ende)
 	return redirect("/listar_pessoas")
+
+@app.route("/form_login")
+def form_login():
+	try:
+		if session["user"]:
+			redirect("/")
+	except:
+		return render_template("form_login.html")
+
+
+@app.route("/login", methods = ["POST"])
+def login():
+	global m
+	global logado
+	print("--------------", logado)
+	if logado:
+		pass
+	else:
+		user = request.form["user"]
+		print("--------------", user)
+		senha_comparar = gest.buscar_senha(user)
+		print("--------------", senha_comparar)
+		if senha_comparar:
+			m.update(request.form["passwd"].encode())
+			senha = m.hexdigest()
+			print("--------------", senha)
+			if senha == senha_comparar:
+				logado = True
+				m = md5()
+				#session["user"] = user
+	return redirect("/")
+
+@app.route("/form_cadastrar")
+def form_cadastrar():
+	return render_template("form_cadastrar.html")
+		
+@app.route("/cadastrar_user", methods = ["POST"])
+def cadastrar_user():
+	user = request.form['user']
+	senha = request.form['passwd'].encode()
+	m.update(senha)
+	senha = m.hexdigest()
+	gest.cadastrar_user(user, senha)
+	return redirect("/")
+
+		
+@app.route("/logout")
+def logout():
+	global logado
+	logado = False
+	return redirect("/")
+
 
 app.run(debug=True)
