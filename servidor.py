@@ -18,7 +18,7 @@ gest = gest()
 gest.criar_tabela()
 
 app = Flask("__name__")
-app.config["secret_key"] = 'senha'
+app.secret_key = 'senha'
 m = md5()
 logado = False
 pegar = lambda x: request.args.get(x)
