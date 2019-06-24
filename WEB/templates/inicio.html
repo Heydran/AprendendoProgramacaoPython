@@ -3,6 +3,8 @@
 <head>
 	<title> Pagina Inicial </title>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/text.css')}}">
+</head>
+<body>
 	{% if logado%}
 		<a id="ali_dir" href="/logout">Logout</a>
 	{%else%}
@@ -11,8 +13,6 @@
 	{%endif%}
 	<h1>Bem Vindo</h1>
 	
-</head>
-<body>
 	<a href="/listar_pessoas">Listar Pessoas</a> <br>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/text.css')}}">
 	{% if logado%}

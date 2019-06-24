@@ -12,7 +12,8 @@
 		<a id="ali_dir" href="/form_cadastrar">Cadastrar</a>
 	{%endif%}
 </head>
-<body bgcolor="#202020">
+<body bgcolor="{{cor_bg}}">
+	<a href="/noturno">MODO NOTURNO</a>
 	<h1 style = "color: #fc0fc0"> Pessoas </h1>
 	<b>
 	<table border="1">
@@ -27,12 +28,12 @@
 	</tr>
 	{% for i in users: %} 
 		<tr>	
-		<td> <center> <font id = "cinza"> {{ i.id }} ª |</font> </center> </td>
+		<td> <center> <font id = "cinza"> {{ i.cod_pessoa }} ª |</font> </center> </td>
 		<td> <center> <font id = "verde"> {{ i.nom_pessoa }} </font> </center> </td>
 		<td> <center> <font id = "ciano"> {{i.endereco}} </font> </center> </td>
 		{% if logado%}
-		<td> <a href="/form_alterar?id={{i.id}}&nome={{i.nome}}&endereco={{i.endereco}}"> <center> <img src="/static/imagens/lapis.png"></center></a> </td>
-		<td> <a href="/deletar_pessoa?nome={{i.nome}}"><center><img src="/static/imagens/foto.png"></center></a> </td>
+		<td> <a href="/form_alterar?cod_pessoa={{i.cod_pessoa}}&nom_pessoa={{i.nom_pessoa}}&endereco={{i.endereco}}"> <center> <img src="/static/imagens/lapis.png"></center></a> </td>
+		<td> <a href="/deletar_pessoa?cod_pessoa={{i.cod_pessoa}}"><center><img src="/static/imagens/foto.png"></center></a> </td>
 		{%endif%}
 		</tr>
 	{% endfor %}
