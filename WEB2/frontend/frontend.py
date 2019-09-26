@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, session
-import peewee_site as p
 import requests
 app = Flask("__name__")
 app.secret_key = 'senha'
@@ -24,3 +23,5 @@ def signin():
 		return "Cadastrado <br> <a href='/'>Voltar</a>"
 	else:
 		return "Erro ao cadastrar <br> <a href='/form_signin'>Voltar</a>"
+
+app.run(debug=True)

@@ -10,3 +10,6 @@ def cadastrar_usuario():
 	passwd = resquest.args.get("passwd")
 	name = resquest.args.get("name")
 	cadastrar_usuario()
+	return True
+
+app.run(debug=True, host = "4999")
