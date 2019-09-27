@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 from hashlib import md5
 import peewee_site as p
 
-app = Flask("__name__")
+app = Flask(__name__)
 app.secret_key = 'senha'
 
 m = md5()
