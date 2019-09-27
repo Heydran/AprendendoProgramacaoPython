@@ -1,15 +1,25 @@
-from flask import Flask, render_template, request, redirect, session
-from db_commands import *
+from flask import Flask , jsonify
+from playhouse.shortcuts import model_to_dict
+from peewee import *
 
-app = Flask("__name__")
-app.secret_key = 'senha'
+db = SqliteDatabase("slite.db")
 
-@app.route("/cadastrar_usuario")
-def cadastrar_usuario():
-	user = resquest.args.get("user")
-	passwd = resquest.args.get("passwd")
-	name = resquest.args.get("name")
-	cadastrar_usuario()
-	return True
+class Pessoa(Model):
+	nome = CharField()
+	class Meta:
+		database = db
+		
 
-app.run(debug=True, host = "4999")
+app = Flask (__name__)
+@app.route("/")
+def inicio () :
+	db.connect()
+	db.create_tables([Pessoa])
+	p = Pessoa.create(nome = "João da Silva")
+	m = Pessoa.create(nome = "Maria de Oliveira")
+	# forma alternativa rápida: usando map (lambda)
+	#pessoas = list(model_to_dict(m))
+	pessoas = list(map(model_to_dict, Pessoa.select()))
+	return jsonify ({"lista":pessoas }) # refer ência : https :// www.geeksforgeeks.org/python–map–function/
+
+app.run(debug=True, port=4999)
