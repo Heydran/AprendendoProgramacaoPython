@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, session
+from flask import Flask, jsonify, session, request
 import requests
 from playhouse.shortcuts import model_to_dict
 from peewee import *
@@ -15,6 +15,10 @@ db.create_tables([Pessoa])
 app = Flask (__name__)
 app.secret_key = 'senha'
 
+@app.route("/")
+def oi():
+	return "oi"
+
 @app.route("/listar_pessoas")
 def listar_pessoas():
 	pessoas = list(map(model_to_dict, Pessoa.select()))
@@ -22,9 +26,8 @@ def listar_pessoas():
 
 @app.route("/cadastrar_pessoa")
 def cadastrar_pessoas():
-	pessoa = requests.get("http://localhost:5000/info_cadastro_pessoa")
-	json_pessoa = pessoa.json()
-	Pessoa.create(nome = json_pessoa["name"])
-	return jsonify({"cadastrado":json_pessoa["name"]})
+	nome = request.args.get("nome")
+	Pessoa.create(nome = nome)
+	return jsonify({"cadastrado":nome})
 
-app.run(debug=True, port=4999)
+app.run(debug=True, port=4999, host = "0.0.0.0")

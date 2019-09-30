@@ -35,12 +35,8 @@ def form_cadastrar_usuario():
 @app.route("/cadastrar_pessoa")
 def cadastrar_pessoa():
 	session["form_cadastrar_name"] = request.args.get("name")
-	cadastrado = requests.get("http://localhost:4999/cadastrar_pessoa")
+	cadastrado = requests.get("http://localhost:4999/cadastrar_pessoa?nome="+request.args.get("name"))
 	cadastrado_json = cadastrado.json()
 	return 	cadastrado_json["cadastrado"]
-
-@app.route("/info_cadastro_pessoa")
-def info_cadastro_pessoa():
-	return jsonify(name = session["form_cadastrar_name"])
 
 app.run(debug=True)
