@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index</title>
+	<script src=https://code.jquery.com/jquery-3.4.1.min.js> </script>
+
+</head>
+<body>
+<img id='cat1' src='img/cat1.jpeg'>
+
+
+<script type="text/javascript">
+
+$("#cat1" ).on("mouseenter", function() {
+  $( this ).css('transform', 'scaleX(-1)');
+});
+
+$("#cat1" ).on("mouseleave", function() {
+  $( this ).css('transform', 'scaleX(1)');
+});
+
+</script>
+</body>
+</html>
