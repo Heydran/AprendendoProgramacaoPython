@@ -4,12 +4,16 @@
 	<title>Index</title>
 	<script src=https://code.jquery.com/jquery-3.4.1.min.js> </script>
 
+
 </head>
-<body>
+<body gcolor = "blue">
 <img id='cat1' src='img/cat1.jpeg'>
 
 
 <script type="text/javascript">
+var acat1 = new Audio();
+acat1.src = "audio/miau.mp3"
+
 
 $("#cat1" ).on("mouseenter", function() {
   $( this ).css('transform', 'scaleX(-1)');
@@ -18,7 +22,9 @@ $("#cat1" ).on("mouseenter", function() {
 $("#cat1" ).on("mouseleave", function() {
   $( this ).css('transform', 'scaleX(1)');
 });
-
+$("#cat1").click(function(){
+ 	acat1.play();
+ })
 </script>
 </body>
 </html>
