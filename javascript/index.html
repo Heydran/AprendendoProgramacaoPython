@@ -7,24 +7,29 @@
 
 </head>
 <body gcolor = "blue">
-<img id='cat1' src='img/cat1.jpeg'>
+<img id='image' src='img/cat1.jpeg'>
 
 
 <script type="text/javascript">
-var acat1 = new Audio();
-acat1.src = "audio/miau.mp3"
+var audio = new Audio();
+audio.src = "audio/miau.mp3"
 
 
-$("#cat1" ).on("mouseenter", function() {
+$("#image" ).on("mouseenter", function() {
   $( this ).css('transform', 'scaleX(-1)');
 });
 
-$("#cat1" ).on("mouseleave", function() {
+$("#image" ).on("mouseleave", function() {
   $( this ).css('transform', 'scaleX(1)');
 });
-$("#cat1").click(function(){
+$("#image").click(function(){
  	acat1.play();
- })
+})
+$(window).keypress(function(event) {
+	if ( event.code == "KeyT"){
+		audio.src = "audio/cao.wav"
+	}
+});
 </script>
 </body>
 </html>
