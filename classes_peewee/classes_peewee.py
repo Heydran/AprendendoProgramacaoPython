@@ -22,12 +22,20 @@ class Personagem(Mdelo):
 	idade = CharField()
 	
 
-class Anime(Modelo):
+class ModeloProduto(Modelo):
 	nome = CharField()
 	generos = ForeignkeyField(Genero)
 	data = CharField()
-	episodios = ForeignkeyField(Episodio)
+	
 	personagens = ForeignkeyField(Personagem)
+
+class Filme(ModeloProduto):
+	duracao = CharField()
+	episodio = ForeignkeyField(Episodio)
+
+class Anime(ModeloProduto):
+	episodios = ManyToManyField(Episodio)
+
 
 class Album(Modelo):
 	nome = CharField()
@@ -35,3 +43,18 @@ class Album(Modelo):
 	animes = ForeignkeyField(Anime)
 
 
+class Diretor(Modelo):
+	nome = CharField()
+	cpf = CharField()
+	salario = CharField()
+	projetos = ForeignkeyField(Anime)
+
+
+class Estudio(Modelo):
+	nome = CharField()
+	diretor = ForeignkeyField()
+	funcionarios = ManyToManyField(Funcionario)
+	animes = ForeignkeyField()
+
+class Usuario(Modelo):
+	pass
